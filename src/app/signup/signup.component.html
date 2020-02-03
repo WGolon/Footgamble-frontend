@@ -1,0 +1,75 @@
+<div class="loader" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="container" *ngIf="!isLoading">
+
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <h1> Registration </h1>
+    <label for='firstName'> <i class="far fa-user"></i> First Name </label>
+    <input
+    placeholder="First Name"
+    type="text"
+    name="firstName"
+    id="firstName"
+    ngModel
+    class='inptField'
+    >
+
+    <label for='lastName'> <i class="far fa-user"></i> Last Name </label>
+    <input
+    placeholder="Last Name"
+    type="text"
+    name="lastName"
+    id="lastName"
+    ngModel
+    class='inptField'
+    >
+
+    <label for='username'> <i class="far fa-user"></i> Username </label>
+    <input
+    placeholder="Username"
+    type="text"
+    name="username"
+    ngModel
+    class='inptField'
+    required
+    #username="ngModel">
+    <span class='help-block' *ngIf="!username.valid && username.touched"> Please enter a username ! </span>
+
+    <label for='email'> <i class="fas fa-at"></i> Email </label>
+    <input
+    placeholder="Email"
+    type="text"
+    name="email"
+    id="email"
+    ngModel
+    class='inptField'
+    email
+    required
+    #email="ngModel">
+    <span class='help-block' *ngIf="!email.valid && email.touched"> Please enter a valid Email ! </span>
+
+    <label for='password'> <i class="fas fa-unlock-alt"></i> Password </label>
+    <input
+    placeholder="Password"
+    type="password"
+    name="password"
+    id="password"
+    ngModel
+    class='inptField'
+    required
+    #password="ngModel">
+    <span class='help-block' *ngIf="!password.valid && password.touched"> Please enter a valid password ! </span>
+
+    <div class="alert" *ngIf="errMessage" > {{ errMessage }} </div>
+    <div class="success" *ngIf="succMessage" > {{ succMessage }} </div>
+
+    <button
+    class="btn"
+    type="submit"
+    [disabled]="!f.valid"
+    > Register </button>
+
+  </form>
+</div>

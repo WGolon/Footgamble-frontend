@@ -1,0 +1,15 @@
+<header class="site-header">
+  <a routerLink='/' class="logo" style="cursor: pointer"> Home <i class="fas fa-futbol"></i> </a>
+  <div class="date"> Date: {{date}}  </div>
+    <nav class="site-nav">
+      <ul>
+        <li class="action"><a style="cursor: pointer;" routerLink="/create" *ngIf="!isAuthenticated" routerLinkActive="active"> Register </a></li>
+        <li class="action" *ngIf="!isAuthenticated"><a style="cursor: pointer;" routerLink="/login" routerLinkActive="active"> Log In </a>  </li>
+        <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" routerLink="/bets" routerLinkActive="active"> Bets <i class="fas fa-star"></i></a>  </li>
+        <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" routerLink="/schedule" routerLinkActive="active"> Schedule <i class="fas fa-calendar-alt"></i> </a>  </li>
+        <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" routerLink="/results" routerLinkActive="active"> Results <i class="fas fa-poll"></i> </a>  </li>
+        <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" routerLink="/user-panel" routerLinkActive="active"> User Panel <i class="fas fa-user-alt"></i> </a>  </li>
+        <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" (click)="onLogout()"> Log Out <i class="fas fa-sign-out-alt"></i> </a>   </li>
+      </ul>
+    </nav>
+</header>

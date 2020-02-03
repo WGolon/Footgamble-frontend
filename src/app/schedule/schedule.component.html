@@ -1,0 +1,81 @@
+<div class="container">
+
+  <form class="form1" *ngIf="isAdmin" (ngSubmit)="onAddingNewMatch(f)" #f="ngForm">
+  <div class="row">
+      <div class="form-col">
+          <label for="startTime">  Match start time </label>
+          <input class="inptField" ngModel type="datetime-local" name='startTime' id='startTime' required>
+        </div>
+
+        <div class="form-col">
+          <label for="team1">  Team 1 name </label>
+          <input class="inptField" ngModel type="text" name="team1" id="team1" placeholder="team1" required>
+        </div>
+
+        <div class="form-col">
+          <label for="team2">  Team 2 name </label>
+          <input class="inptField" ngModel type="text" name="team2" id="team2" placeholder="team2" required >
+        </div>
+
+  </div>
+  <div class="row">
+    <button class="btn1" type="submit" [disabled]="!f.valid"> Add new Match</button>
+  </div>
+  </form>
+
+  <div class="alert" *ngIf="messages.alert">{{messages.alert}}</div>
+  <div class="success" *ngIf="messages.success">{{messages.success}}</div>
+  <table *ngIf="schedule && !isAdmin">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements1" >{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let el of schedule; let i=index">
+        <td>{{schedule.length - i}}</td>
+        <td>{{el.startTime}}</td>
+        <td>{{el.team1}}</td>
+        <td>{{el.result1}}</td>
+        <td>{{el.result2}}</td>
+        <td>{{el.team2}}</td>
+        <td>{{el.endTime}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="schedule && isAdmin">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements2" >{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let el of schedule; let i=index">
+        <td>{{schedule.length - i}}</td>
+        <td>{{el.startTime}}</td>
+        <td>{{el.team1}}</td>
+
+            <td>
+              <form class="form2" (ngSubmit)="onUpdateResult(f)" #f="ngForm">
+                <div *ngIf="el.result1 !== '-'" class="res1">{{el.result1}}</div>
+                <input *ngIf="el.result1 == '-'" ngModel="{{el.result1}}" type="text" required name="result1" id="result1" >
+
+                <button *ngIf="el.result1 == '-'" class="btn2" type="submit" [disabled]="!f.valid" >Update</button>
+
+                <div class="separator" *ngIf="el.result1 !== '-'">:</div>
+                <input type="hidden" ngModel="{{i}}" name="index" id="index" />
+
+                <div *ngIf="el.result1 !== '-'" class="res1">{{el.result2}}</div>
+                <input *ngIf="el.result1 == '-'" ngModel="{{el.result2}}" type="text" name="result2" id="result2" required>
+              </form>
+            </td>
+
+        <td>{{el.team2}}</td>
+        <td>{{el.endTime}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>

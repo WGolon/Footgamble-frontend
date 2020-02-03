@@ -1,0 +1,96 @@
+
+<div class="container" *ngIf="data">
+  <p class="hello" *ngIf="data.username"> Hello {{data.username}} !</p>
+
+  <div class="info">
+    <div class="row row-head">
+      <h3>General information</h3>
+    </div>
+    <div class="row row-body">
+      <div class="col1"><h4>Bets</h4> <p>You can bet matches there, but only if you are member of active group. Only match that hasn't started yet can be bet or RE BET. Input fields are pre filled by your actual bet</p></div>
+      <div class="col1"><h4>Schedule</h4> <p>Shows all scheduled matches sorted by date. If match result appears there, it means that match has beed finished and there are actual results </p></div>
+      <div class="col1"><h4>Results</h4> <p>Contains readonly scoreboard with all players sorted by decreasing points collected. You can view it only if you are member of an active group</p></div>
+    </div>
+
+
+
+  </div>
+
+  <div *ngIf="data.invIN" class="inv invIN">
+    <h3>Incoming invitations</h3>
+    <p *ngIf="!invitationsRecieved[0]"> You have no incoming invitations </p>
+
+    <table *ngIf="invitationsRecieved[0]">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements" >{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let el of invitationsRecieved; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{el.fName}}</td>
+          <td>{{el.lName}}</td>
+          <td>{{el.username}}</td>
+          <td>{{el.groupName}}</td>
+          <td>
+            <a (click)="onInvAccept(i)"><i class="fas fa-check-square"></i></a>
+            <a (click)="onInvReject(i)"><i class="fas fa-window-close"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="data.invOUT && data.invitations.invOUT" class="inv invIN">
+    <p class="success" *ngIf="invMessage.resp">{{invMessage.resp}}</p>
+    <p class="alert" *ngIf="invMessage.err">{{invMessage.err}}</p>
+    <form (ngSubmit)="onSendingInv(inv)" #inv="ngForm">
+      <label for="sendingInv"> Send an invitation </label>
+      <input
+      class="inptField"
+      ngModel
+      required
+      name="sendingInv"
+      id="sendingInv"
+      placeholder="Type a nickname here"
+      type="text">
+      <button type="submit" class="btn" [disabled]="!inv.valid"> Invite </button>
+    </form>
+
+    <table *ngIf="invitationsPending[0]">
+      <thead>
+        <tr>
+          <th *ngFor="let head of headElements" >{{head}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let el of invitationsPending; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{el.fName}}</td>
+          <td>{{el.lName}}</td>
+          <td>{{el.username}}</td>
+          <td>{{el.groupName}}</td>
+          <td>
+            <a (click)="onPendInvReject(i)"><i class="fas fa-window-close"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="groupName" *ngIf="data.groupCreation">
+  <form (ngSubmit)="onGroupCreation(d)" #d="ngForm">
+    <label for="groupName"> Make your own group ! </label>
+    <input
+    class="inptField"
+    ngModel
+    required
+    name="groupName"
+    id="groupName"
+    placeholder="Type a group name here"
+    type="text">
+    <button type="submit" class="btn" [disabled]="!d.valid"> Create </button>
+  </form>
+  </div>
+
+</div>

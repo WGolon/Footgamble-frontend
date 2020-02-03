@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="info alert" *ngIf="mainErr"> {{mainErr}}</div>
+  <div class="alert" *ngIf="messages.alert">{{messages.alert}}</div>
+  <div class="success" *ngIf="messages.success">{{messages.success}}</div>
+
+  <table *ngIf="schedule">
+    <thead>
+      <tr>
+        <th *ngFor="let head of headElements" >{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let el of schedule; let i=index">
+        <td>{{schedule.length - i}}</td>
+        <td>{{el.startTime}}</td>
+        <td>{{el.team1}}</td>
+
+            <td>
+              <form (ngSubmit)="onBetting(f)" #f="ngForm">
+                <div *ngIf="el.old" class="res1">{{el.result1}}</div>
+                <input *ngIf="!el.old" ngModel="{{el.result1}}" type="text" required name="result1" id="result1" >
+
+                <button class="btn" type="submit" *ngIf="!el.old" [disabled]="!f.valid" >Bet</button>
+                <div class="separator" *ngIf="el.old">:</div>
+                <input type="hidden" ngModel="{{i}}" name="index" id="index" />
+
+                <div *ngIf="el.old" class="res1">{{el.result2}}</div>
+                <input *ngIf="!el.old" ngModel="{{el.result2}}" type="text" name="result2" id="result2" required>
+              </form>
+            </td>
+
+        <td>{{el.team2}}</td>
+        <td>{{el.endTime}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>

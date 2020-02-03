@@ -2,24 +2,22 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: rgb(204, 204, 204);
+  background-color: #ccc;
   width: 100%;
 }
-
 .container {
   display: flex;
   flex-direction: column;
   width: 1140px;
   min-height: 100vh;
   margin: auto;
-  background-color: #FFF;
+  background-color: #fff;
 }
-
 main {
   flex: 2;
-  background-color: #E1E1E1;
+  background-color: #e1e1e1;
 }
-footer{
+footer {
   display: flex;
   align-content: flex-end;
   align-items: center;
@@ -31,15 +29,10 @@ footer{
 }
 i {
   color: #3b5998;
-  background-color: #E1E1E1;
+  background-color: #e1e1e1;
   margin: 0;
   font-size: 1.2em;
-  padding:3px;
+  padding: 3px;
   border: 1px solid #3b5998;
   margin-left: 10px;
 }
-
-// .container {
-//   margin: auto;
-//   width: 1140px;
-// }

@@ -1,0 +1,39 @@
+<div class="loader" *ngIf="isLoading">
+  <app-loading-spinner> </app-loading-spinner>
+</div>
+
+<div class="container" *ngIf="!isLoading">
+
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <h1> Log in </h1>
+      <label for="username">  <i class="far fa-user"></i> Username </label>
+      <input
+      ngModel
+      placeholder="Username"
+      id="username"
+      name="username"
+      required
+      type="text"
+      class="inptField"
+      >
+
+      <label for="password"><i class="fas fa-unlock-alt"></i> Password </label>
+      <input
+      ngModel
+      placeholder="Password"
+      id="password"
+      name="password"
+      required
+      type="password"
+      class="inptField"
+      >
+      <div class="alert" *ngIf="errMessage" > {{ errMessage }} </div>
+
+      <button
+      class="btn"
+      type="submit"
+      [disabled]="!form.valid">
+        Log In
+      </button>
+    </form>
+</div>

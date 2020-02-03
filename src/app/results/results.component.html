@@ -1,0 +1,24 @@
+
+<div class="container">
+
+
+  <div class="info alert" *ngIf="mainErr"> {{mainErr}}</div>
+
+<div class="tabWrap">
+    <table>
+        <thead>
+          <tr>
+            <th class="col" *ngFor="let head of tableHeader" >{{head}} </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row" *ngFor="let el of tableContent; let i=index">
+            <td *ngFor="let minor of el">{{minor}}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</div>
