@@ -30,7 +30,7 @@ export class AuthService {
       const userRes = new User(resData.token, resData.username, resData.isPro, resData.isAdmin);
       localStorage.setItem('userData', JSON.stringify(userRes));
       this.user.next(userRes);
-      this.autologout(5000);
+      this.autologout(3600000);
     })
     );
     }
@@ -57,6 +57,6 @@ export class AuthService {
     autologout(expirationDuration: number) {
       this.tokenExpirationTimer = setTimeout(() => {
         this.logout();
-      }, 5000);
+      }, expirationDuration);
     }
 }
