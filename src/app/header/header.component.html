@@ -1,8 +1,8 @@
 <header class="site-header">
-  <a routerLink='/' class="logo" style="cursor: pointer"> Home <i class="fas fa-futbol"></i> </a>
+  <a routerLink='/' class="logo" style="cursor: pointer"> <span>Home</span> <i class="fas fa-futbol"></i> </a>
   <div class="date"> Date: {{date}}  </div>
-    <nav class="site-nav">
-      <ul>
+    <nav >
+      <ul class="site-nav">
         <li class="action"><a style="cursor: pointer;" routerLink="/create" *ngIf="!isAuthenticated" routerLinkActive="active"> Register </a></li>
         <li class="action" *ngIf="!isAuthenticated"><a style="cursor: pointer;" routerLink="/login" routerLinkActive="active"> Log In </a>  </li>
         <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" routerLink="/bets" routerLinkActive="active"> Bets <i class="fas fa-star"></i></a>  </li>
@@ -11,5 +11,12 @@
         <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" routerLink="/user-panel" routerLinkActive="active"> User Panel <i class="fas fa-user-alt"></i> </a>  </li>
         <li class="action" *ngIf="isAuthenticated"><a style="cursor: pointer;" (click)="onLogout()"> Log Out <i class="fas fa-sign-out-alt"></i> </a>   </li>
       </ul>
+
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+
     </nav>
 </header>

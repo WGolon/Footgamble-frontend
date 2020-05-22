@@ -22,7 +22,9 @@ export class SignupComponent {
     username: '',
     email: '',
     password: '',
+    password2: '',
   };
+
 
   errMessage = null;
   succMessage = null;
@@ -38,13 +40,12 @@ export class SignupComponent {
     this.user.username = form.value.username;
     this.user.email = form.value.email;
     this.user.password = form.value.password;
+    this.user.password2 = form.value.password2;
     this.isLoading = true;
     this.authService.createUser(this.user).subscribe(res => {
-      console.log(res);
-      this.succMessage = 'Registered Succesfully';
+      this.succMessage = 'Registered Successfully';
       this.isLoading = false;
     }, errorMessage => {
-      console.log(errorMessage);
       this.errMessage = errorMessage;
       this.isLoading = false;
     });

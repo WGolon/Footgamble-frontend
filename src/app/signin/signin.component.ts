@@ -32,12 +32,10 @@ export class SigninComponent implements OnInit {
     this.isLoading = true;
     this.authService.loginUser(this.user).subscribe(res => {
       this.isLoading = false;
-      console.log(res);
       this.router.navigate(['user-panel']);
     }, errorMessage => {
       this.isLoading = false;
       this.errMessage = errorMessage;
-      console.log(errorMessage);
     });
   }
 

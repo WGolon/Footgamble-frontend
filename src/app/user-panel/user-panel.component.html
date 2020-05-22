@@ -2,25 +2,60 @@
 <div class="container" *ngIf="data">
   <p class="hello" *ngIf="data.username"> Hello {{data.username}} !</p>
 
+  <div class="border"></div>
+
   <div class="info">
     <div class="row row-head">
       <h3>General information</h3>
     </div>
-    <div class="row row-body">
-      <div class="col1"><h4>Bets</h4> <p>You can bet matches there, but only if you are member of active group. Only match that hasn't started yet can be bet or RE BET. Input fields are pre filled by your actual bet</p></div>
-      <div class="col1"><h4>Schedule</h4> <p>Shows all scheduled matches sorted by date. If match result appears there, it means that match has beed finished and there are actual results </p></div>
-      <div class="col1"><h4>Results</h4> <p>Contains readonly scoreboard with all players sorted by decreasing points collected. You can view it only if you are member of an active group</p></div>
+    <div class="row">
+      <div class="col1"><h4>Bets <i class="fas fa-star"></i></h4> <p>You can bet matches there, but only if you are member of an active group. Only match that hasn't started yet can be bet or RE BET. Input fields are pre filled with your actual bet.</p></div>
+      <div class="col1"><h4>Schedule <i class="fas fa-calendar-alt"></i></h4> <p>Shows all scheduled matches sorted by date. If match result appears there, it means that match has ended and admin updated its results. </p></div>
+      <div class="col1"><h4>Results <i class="fas fa-poll"></i></h4>  <p>Contains readonly scoreboard with all players sorted by collected points in descending order. Players bets are shown there for every match that has started. Points are updated when admin manualy updates certain match result.</p></div>
     </div>
 
+    <div class="border" style="margin-top: 15px"></div>
 
+    <div class="row scoring-info">
+      <h3>Scoring rules</h3>
+    </div>
+    <div class="row rules">
+      <div>
+        <p>
+          Scoring system is rewarding the user with 3.01 points when he predicts the exact result of the match, 1 point when he predicts the result of the match (winning one, the other team or a draw) and the player will not receive points at all when he misses any of the above. (Example below)
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <img src="assets/scoring.png" alt="scoring">
+    </div>
+
+    <div class="border" style="margin-top: 15px"></div>
+
+    <div class="row status-info">
+      <h3>Status info</h3>
+    </div>
+    <div class="row">
+      <div class="col1 status">
+        <div><i class="fas green fa-futbol"></i> <span>Match hasn't started yet.</span></div>
+      </div>
+      <div class="col1 status">
+        <div><i class="fas orange fa-futbol"></i> <span> Match in progress.</span></div>
+      </div>
+      <div class="col1 status">
+       <div><i class="fas red fa-futbol"></i> <span>Match finished.</span></div>
+      </div>
+    </div>
+
+    <div class="border" style="margin-top: 15px"></div>
 
   </div>
 
   <div *ngIf="data.invIN" class="inv invIN">
-    <h3>Incoming invitations</h3>
-    <p *ngIf="!invitationsRecieved[0]"> You have no incoming invitations </p>
+    <h3 style="margin-bottom: 10px">Incoming invitations</h3>
+    <p *ngIf="!invitationsRecieved[0]" style="margin-bottom: 10px"> You have no incoming invitations </p>
 
-    <table *ngIf="invitationsRecieved[0]">
+    <table *ngIf="invitationsRecieved[0]"style="margin-bottom: 10px">
       <thead>
         <tr>
           <th *ngFor="let head of headElements" >{{head}} </th>
@@ -29,13 +64,12 @@
       <tbody>
         <tr  *ngFor="let el of invitationsRecieved; let i=index">
           <td>{{i+1}}</td>
-          <td>{{el.fName}}</td>
-          <td>{{el.lName}}</td>
           <td>{{el.username}}</td>
           <td>{{el.groupName}}</td>
           <td>
-            <a (click)="onInvAccept(i)"><i class="fas fa-check-square"></i></a>
-            <a (click)="onInvReject(i)"><i class="fas fa-window-close"></i></a></td>
+            <div><a (click)="onInvAccept(i)"><i class="fas fa-check-square"></i></a>
+              <a (click)="onInvReject(i)"><i class="fas fa-window-close"></i></a></div>
+            </td>
         </tr>
       </tbody>
     </table>
@@ -66,8 +100,6 @@
       <tbody>
         <tr  *ngFor="let el of invitationsPending; let i=index">
           <td>{{i+1}}</td>
-          <td>{{el.fName}}</td>
-          <td>{{el.lName}}</td>
           <td>{{el.username}}</td>
           <td>{{el.groupName}}</td>
           <td>

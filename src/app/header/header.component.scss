@@ -1,13 +1,17 @@
 .site-header {
-  height: 60px;
-  background-color: #408140;
+  width: 100%;
+  height: 45px;
+  //background-color: #408E2F;
+  background-color: rgb(15, 116, 129);
   color: white;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-radius: 4px;
 }
-
+ul {
+  display: none;
+}
 
 
 .date {
@@ -25,11 +29,15 @@
   font-size: 2.2rem;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 .site-nav {
   height: 100%;
   display: flex;
   align-items: center;
-  ul{
     padding-left: 0;
     display: flex;
     align-items: stretch;
@@ -48,11 +56,9 @@
         align-items: stretch;
       }
       :hover {
-        background-color: rgb(44, 44, 44);
-        color: white;
+        background-color: rgb(100, 100, 100);
       }
     }
-  }
 }
 
 a {
@@ -70,28 +76,94 @@ a {
 
 .fa-futbol {
     font-size: 2.2rem;
-    color: #2155cd
+    color: rgb(44, 44, 44);
 }
 .fa-star {
     color: gold;
 }
 
 .fa-calendar-alt {
-  color: rgb(85, 84, 173)
+  color: rgb(211, 131, 77);
 }
 
 .fa-poll {
-  color: #20b5da;
+  color: #35ff68;
 }
 
 .fa-user-alt {
   color: #fff;
 }
 .fa-sign-out-alt {
-  color :rgb(212, 30, 30)
+  color :rgb(255, 58, 58)
 }
 
 .active {
-  background-color: rgb(44, 44, 44);
+  background-color: rgb(75, 75, 75);
   border-bottom: 2px solid yellow;
+}
+
+.burger {
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  div {
+  width: 15px;
+  height: 3px;
+  background-color: black;
+  margin: 5px;
+  }
+}
+
+@media screen and(max-width: 768px){
+  .burger {
+    display: flex;
+  }
+  .site-nav {
+    display: none;
+  }
+}
+
+@media screen and(max-width: 1024px){
+  .burger {
+    display: flex;
+  }
+  .site-nav {
+    display: none;
+  }
+  .responsive {
+    z-index: 1;
+    overflow: hidden;
+    position: absolute;
+    top:45px;
+    right: 0;
+    margin: 0;
+    height: fit-content;
+    li {
+      width: 100%;
+      border: none;
+      a {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: teal;
+    //transform: translateX(100%);
+  }
+  .logo {
+    margin-left: 0px;
+    padding: 0px;
+    span {
+      display: none;
+    }
+  }
+}
+@media screen and(max-width: 1124px) {
+  .logo span {
+    display: none;
+  }
 }

@@ -1,6 +1,14 @@
 @import url(~@fortawesome/fontawesome-free/css/all.css);
+* {
+  margin: 0;
+  padding: 0;
+}
 html {
   background-color: #ccc;
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 body {
   box-sizing: border-box;

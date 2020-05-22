@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -15,7 +16,7 @@ import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { BetsComponent } from './bets/bets.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ResultsComponent } from './results/results.component';
-import { FooterComponent } from './footer/footer.component';
+import { ConfirmComponent } from './shared/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -29,13 +30,14 @@ import { FooterComponent } from './footer/footer.component';
     BetsComponent,
     ScheduleComponent,
     ResultsComponent,
-    FooterComponent
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},

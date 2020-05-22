@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
+  // url = '';
+  url = 'http://localhost:3000';
   user = new BehaviorSubject<User>(null);
   private token: string;
   private tokenExpirationTimer: any;
@@ -15,14 +17,14 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   createUser(body: CreateUser) {
-    return this.http.post('http://localhost:3000/api/auth/register', body)
+    return this.http.post(`${this.url}/api/auth/register`, body)
     .pipe(catchError(errorRes => {
       return throwError(errorRes.error.message);
     }));
     }
 
   loginUser(user: {username: string, password: string}) {
-    return this.http.post<UserLoginResponse>('http://localhost:3000/api/auth/login', user)
+    return this.http.post<UserLoginResponse>(`${this.url}/api/auth/login`, user)
     .pipe(catchError(errorRes => {
       return throwError(errorRes.error);
     }),

@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class BetsComponent implements OnInit {
 
   schedule: Schedule[];
-  headElements = ['id', 'Starting', 'Team 1', 'Betting', 'Team 2', 'Ending'];
+  headElements = ['nr', 'Status', 'Starting', 'Team 1', 'Betting', 'Team 2', 'Ending'];
   messages = {
     alert: null,
     success: null,
@@ -41,13 +41,14 @@ export class BetsComponent implements OnInit {
   onBetting(form: NgForm) {
     this.messages.alert = null;
     this.messages.success = null;
-    const typed = Object.assign({}, this.schedule[form.value.index]);
+    const typed = Object.assign({}, this.schedule[this.schedule.length - form.value.index]);
     typed.startTime = (new Date(typed.startTime)).toISOString();
     typed.endTime = (new Date(typed.endTime)).toISOString();
     typed.result1 = form.value.result1;
     typed.result2 = form.value.result2;
     this.dataService.betMatch(typed).subscribe(res => {
-      this.messages.success = 'Your bet has been saved in database';
+      // tslint:disable-next-line: max-line-length
+      this.messages.success = `Your bet has been saved in database => ${typed.team1 + ' ' + typed.result1 + ' - ' + typed.result2 + ' ' + typed.team2}`;
     }, err => {
 
       this.messages.alert = err.error;

@@ -28,6 +28,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.clock(timeMod);
 
     });
+
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.site-nav');
+
+    burger.addEventListener('click', () => {
+      nav.classList.toggle('responsive');
+    });
+
   }
 
   onLogout() {

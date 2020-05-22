@@ -1,18 +1,22 @@
 <div class="container">
 
+  <!-- [message]="matchData" -->
+  <!-- *ngIf="matchData.team1" -->
+  <!-- <app-confirm></app-confirm> -->
+
   <form class="form1" *ngIf="isAdmin" (ngSubmit)="onAddingNewMatch(f)" #f="ngForm">
   <div class="row">
-      <div class="form-col">
+      <div class="form-col col1">
           <label for="startTime">  Match start time </label>
           <input class="inptField" ngModel type="datetime-local" name='startTime' id='startTime' required>
         </div>
 
-        <div class="form-col">
+        <div class="form-col col2">
           <label for="team1">  Team 1 name </label>
           <input class="inptField" ngModel type="text" name="team1" id="team1" placeholder="team1" required>
         </div>
 
-        <div class="form-col">
+        <div class="form-col col3">
           <label for="team2">  Team 2 name </label>
           <input class="inptField" ngModel type="text" name="team2" id="team2" placeholder="team2" required >
         </div>
@@ -25,21 +29,28 @@
 
   <div class="alert" *ngIf="messages.alert">{{messages.alert}}</div>
   <div class="success" *ngIf="messages.success">{{messages.success}}</div>
-  <table *ngIf="schedule && !isAdmin">
+
+  <table class="tab" *ngIf="schedule && !isAdmin">
     <thead>
       <tr>
         <th *ngFor="let head of headElements1" >{{head}} </th>
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let el of schedule; let i=index">
-        <td>{{schedule.length - i}}</td>
-        <td>{{el.startTime}}</td>
-        <td>{{el.team1}}</td>
-        <td>{{el.result1}}</td>
-        <td>{{el.result2}}</td>
-        <td>{{el.team2}}</td>
-        <td>{{el.endTime}}</td>
+      <tr  *ngFor="let el of schedule |paginate: {itemsPerPage: 10, currentPage: p }">
+        <td class="id">{{el.ind}}</td>
+        <td class="status">          <i [ngClass]="{
+          'fas fa-futbol' : true,
+          'red' : true,
+          'green': el.old ==='didNotStart',
+          'orange': el.old ==='currentlyPlaying'
+        }"></i></td>
+        <td class="time">{{el.startTime}}</td>
+        <td class="team">{{el.team1}}</td>
+        <td class="result">
+          {{el.result1}} : {{el.result2}}</td>
+        <td class="team">{{el.team2}}</td>
+        <td class="time">{{el.endTime}}</td>
       </tr>
     </tbody>
   </table>
@@ -51,31 +62,42 @@
       </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let el of schedule; let i=index">
-        <td>{{schedule.length - i}}</td>
-        <td>{{el.startTime}}</td>
-        <td>{{el.team1}}</td>
+      <tr  *ngFor="let el of schedule |paginate: {itemsPerPage: 10, currentPage: p } ">
+        <td class="id">{{el.ind}}</td>
+        <td class="time">{{el.startTime}}</td>
+        <td class="team">{{el.team1}}</td>
 
-            <td>
+            <td *ngIf="el.old === 'ended' " class="results">
               <form class="form2" (ngSubmit)="onUpdateResult(f)" #f="ngForm">
-                <div *ngIf="el.result1 !== '-'" class="res1">{{el.result1}}</div>
-                <input *ngIf="el.result1 == '-'" ngModel="{{el.result1}}" type="text" required name="result1" id="result1" >
+                <input ngModel="{{el.result1}}" type="text" required name="result1" id="result1" maxlength="2" minlength="1">
 
                 <button *ngIf="el.result1 == '-'" class="btn2" type="submit" [disabled]="!f.valid" >Update</button>
 
-                <div class="separator" *ngIf="el.result1 !== '-'">:</div>
-                <input type="hidden" ngModel="{{i}}" name="index" id="index" />
+                <button *ngIf="el.result1 !== '-'" class="btn2 re" type="submit" [disabled]="!f.valid" >reUpdate</button>
 
-                <div *ngIf="el.result1 !== '-'" class="res1">{{el.result2}}</div>
-                <input *ngIf="el.result1 == '-'" ngModel="{{el.result2}}" type="text" name="result2" id="result2" required>
+                <input type="hidden" ngModel="{{el.ind}}" name="index" id="index" />
+                <input ngModel="{{el.result2}}" type="text" name="result2" id="result2" required maxlength="2" minlength="1">
               </form>
             </td>
 
-        <td>{{el.team2}}</td>
-        <td>{{el.endTime}}</td>
+            <td *ngIf="el.old === 'didNotStart'" class="results">
+              <form class="form2" (ngSubmit)="onDeleteMatch(f)" #f="ngForm">
+                <input type="hidden" ngModel="{{el.ind}}" name="index" id="index" />
+                <button class="btn2 del" type="submit">Delete match</button>
+              </form>
+            </td>
+            <td *ngIf="el.old === 'currentlyPlaying'" class="results">
+              <form class="form2">
+                <input type="hidden" ngModel="{{el.ind}}" name="index" id="index" />
+                <button class="btn2 start" [disabled]=true> <i class="fas fa-futbol"></i>... the game is on </button>
+              </form>
+            </td>
+        <td class="team">{{el.team2}}</td>
+        <td class="time">{{el.endTime}}</td>
       </tr>
     </tbody>
   </table>
+  <pagination-controls *ngIf="schedule && schedule.length > 10" class="pagination" (pageChange)="p = $event"></pagination-controls>
 
 
 </div>

@@ -1,31 +1,11 @@
-<div class="loader" *ngIf="isLoading">
-  <app-loading-spinner></app-loading-spinner>
-</div>
+<div class="container">
 
-<div class="container" *ngIf="!isLoading">
+  <div class="loader" *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 
-  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="!isLoading">
       <h1> Registration </h1>
-    <label for='firstName'> <i class="far fa-user"></i> First Name </label>
-    <input
-    placeholder="First Name"
-    type="text"
-    name="firstName"
-    id="firstName"
-    ngModel
-    class='inptField'
-    >
-
-    <label for='lastName'> <i class="far fa-user"></i> Last Name </label>
-    <input
-    placeholder="Last Name"
-    type="text"
-    name="lastName"
-    id="lastName"
-    ngModel
-    class='inptField'
-    >
-
     <label for='username'> <i class="far fa-user"></i> Username </label>
     <input
     placeholder="Username"
@@ -56,11 +36,27 @@
     type="password"
     name="password"
     id="password"
-    ngModel
+    [(ngModel)] = "user.password"
     class='inptField'
+    autocomplete="off"
     required
     #password="ngModel">
     <span class='help-block' *ngIf="!password.valid && password.touched"> Please enter a valid password ! </span>
+
+    <label for='password2'> <i class="fas fa-unlock-alt"></i> Repeat password </label>
+    <input
+    placeholder="Repeat password"
+    type="password"
+    name="password2"
+    id="password2"
+    class='inptField'
+    autocomplete="off"
+    required
+    [pattern] = 'user.password'
+    [(ngModel)] = "user.password2"
+    #password2="ngModel"
+    >
+    <span class='help-block' *ngIf="!password2.valid && password2.touched && user.password2!==user.password"> Passwords are not the same </span>
 
     <div class="alert" *ngIf="errMessage" > {{ errMessage }} </div>
     <div class="success" *ngIf="succMessage" > {{ succMessage }} </div>
@@ -73,3 +69,20 @@
 
   </form>
 </div>
+
+
+<!-- <div class="form-group">
+  <input type="password" [(ngModel)]="user.password" name="password" placeholder="Password" class="form-control" required #password="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+  <div *ngIf="password.invalid && (myform.submitted || password.touched)" class="alert alert-danger">
+    <div *ngIf="password.errors.required"> Password is required. </div>
+    <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
+  </div>
+ </div>
+
+ <div class="form-group">
+  <input type="password" [(ngModel)]="userdata.confirmpassword" name="confirmpassword" placeholder="Confirm Password" class="form-control" required #confirmpassword="ngModel" pattern="{{ password.value }}" />
+  <div *ngIf=" confirmpassword.invalid && (myform.submitted || confirmpassword.touched)" class="alert alert-danger">
+    <div *ngIf="confirmpassword.errors.required"> Confirm password is required. </div>
+    <div *ngIf="confirmpassword.errors.pattern"> Password & Confirm Password does not match.</div>
+  </div>
+ </div> -->

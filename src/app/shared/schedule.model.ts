@@ -5,5 +5,6 @@ export interface Schedule {
     endTime: string;
     result1: any;
     result2: any;
-    old?: boolean;
+    old?: string;
+    ind?: number;
 }

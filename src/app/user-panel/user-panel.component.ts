@@ -23,7 +23,7 @@ export class UserPanelComponent implements OnInit {
     err: null,
   };
 
-  headElements = ['ID', 'First Name', 'Last Name', 'Username', 'Group Name', 'Accept / Reject'];
+  headElements = ['ID', 'Username', 'Group Name', 'Accept / Reject'];
 
   invitationsPending: [{}];
 
@@ -63,7 +63,6 @@ export class UserPanelComponent implements OnInit {
     this.dataService.recInvAccept(this.invitationsRecieved[i]).subscribe(res => {
       this.ngOnInit();
     }, err => {
-      console.log(err);
     });
   }
 
@@ -72,7 +71,6 @@ export class UserPanelComponent implements OnInit {
       res => {
         this.invitationsRecieved.splice(i, 1);
       }, err => {
-        console.log(err);
       }
     );
   }

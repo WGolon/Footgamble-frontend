@@ -3,26 +3,33 @@
 .container {
   display: flex;
   flex-direction: column;
+  overflow: auto;
   align-items: center;
-  background-color: #E1E1E1;
+  color: rgb(182, 182, 182);
+  min-height: calc(100vh - (45px + 30px));
+  background-color: rgb(44, 44, 44);
   box-sizing: border-box;
 }
 
 .inv {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  text-align: center;
-  margin: 20px auto;
-  width: 80%;
-  border: 1px solid black;
+  margin-top: 20px;
+  max-width: 600px;
+  min-width: 555px;
+  width:90%;
 }
+
 table {
-	width: 750px;
-	border-collapse: collapse;
-  margin:10px auto;
-  -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.49);
-  -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.49);
-  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.49);
+  max-width: 600px;
+  min-width: 555px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.49);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.49);
+  box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.49);
 	}
 
   .invIN h3 {
@@ -30,25 +37,31 @@ table {
   }
 
 tr:nth-of-type(odd) {
-	background: #eee;
+	background: rgb(56, 56, 56);
 	}
 
 th {
-	background: #3498db;
+  font-size: 15px;
+  padding: 8px;
+	background: rgb(26, 26, 26);
 	color: white;
   font-weight: bold;
   border-radius: 2px;
 	}
 
-td, th {
-	padding: 10px;
-	border-bottom: 1px solid #ddd;
-	text-align: center;
+td {
+	padding: 8px;
+  margin:0;
+  height: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
 	font-size: 15px;
   }
   td:nth-last-of-type(1){
-    display: flex;
-    justify-content: space-evenly;
+    div{
+      display: flex;
+      justify-content: space-evenly;
+    }
   }
 
   a {
@@ -81,6 +94,7 @@ td, th {
   }
 
   h3{
+    color: white;
     text-align: center;
     margin:0;
   }
@@ -91,22 +105,41 @@ td, th {
     width: 100%;
     font-size: 0.8em;
     font-family: 'Roboto';
-    background-color: #222930;
+    background-color: rgb(44, 44, 44);
     color: #E9E9E9;
     display: flex;
+    align-items: center;
     flex-direction: column;
     h3{
+      font-size: 19px;
+      margin-bottom: 6px;
       color: #4EB1BA;
     }
 
   .row {
-    min-width: 900px;
+    p{
+      text-indent: 20px;
+      //max-width: 80%;
+    }
+    img {
+      margin: 8px 0;
+      max-width: 100%;
+      min-width: 300px;
+      height: auto;
+    }
+    max-width: 100%;
+    min-width: 306px;
     display: flex;
+    //align-items: center;
     justify-content: space-evenly;
     flex-direction: row;
+    h4 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
     .col1{
       text-align: justify;
-      max-width: 300px;
+      max-width: 330px;
       display: flex;
       flex-direction: column;
       margin: 10px;
@@ -127,6 +160,7 @@ td, th {
     color: black;
     margin: 10px auto;
   }
+
   .alert {
     text-align: center;
     font-size: 15px;
@@ -147,7 +181,7 @@ td, th {
     flex-direction: row;
     justify-content: stretch;
     align-items: center;
-    min-width: 95%;
+    min-width: 85%;
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -195,4 +229,89 @@ td, th {
     &:disabled {
       opacity: .5;
     }
+  }
+
+  .fa-star {
+    color: gold;
+}
+.fa-calendar-alt {
+  color: rgb(211, 131, 77);
+}
+.fa-poll {
+  color: #35ff68;
+}
+
+.red {
+  color: rgb(197, 55, 55);
+}
+.orange {
+  color: rgb(194, 156, 86);
+}
+.green {
+  color: rgb(54, 156, 54);
+}
+
+.status {
+  align-items: center;
+  i {
+    margin-right: 10px;
+  }
+}
+
+.rules {
+  display: flex;
+  flex-direction: row;
+  text-align: justify;
+  width: 80%;
+}
+.scoring-info, .status-info {
+  margin-top: 10px;
+}
+.border {
+  width: 100%;
+  border-bottom: 1px solid #4EB1BA;
+}
+
+  @media screen and(max-width: 1024px){
+    table {
+      max-width: 90%;
+      min-width: 340px;
+    }
+    .inv {
+      width: 80%;
+      min-width: 300px;
+    }
+    .border {
+      width: 96vw;
+    }
+  }
+
+  @media screen and(max-width: 750px){
+    .info{
+      max-width: 100%;
+      align-items: center;
+      .row {
+      max-width: 360px;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .inv {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    form {
+      width: 55%;
+      flex-direction: column;
+      justify-content: center;
+      label, input{
+        margin: 0 0 5px 0;
+        align-items: center;
+        justify-content: center;
+        width: 80%
+      }
+    }
+  }
   }
