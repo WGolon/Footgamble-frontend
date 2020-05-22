@@ -1,3 +1,3 @@
 Frontend in development mode
 
-Application live at: test.footgamble.woost.pl
+Application live at: https://test.footgamble.woost.pl/login
